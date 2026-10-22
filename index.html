@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b22">
+<title>un TRUC pour toi ✦</title>
+<style>
+:root{--bg:#080a20;--panel:rgba(19,20,53,.72);--line:rgba(190,155,255,.22);--violet:#b78aff;--lilac:#e3ceff;--muted:#b8b3d4;--white:#fbf8ff}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;color:var(--white);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(ellipse at 15% 15%,#262052 0,transparent 34%),radial-gradient(ellipse at 85% 40%,#1c1c50 0,transparent 32%),linear-gradient(160deg,#080a20,#10102d 55%,#08091b);min-height:100vh;overflow-x:hidden}
+#stars{position:fixed;inset:0;pointer-events:none;z-index:-1}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite alternate;opacity:var(--o,.65)}
+@keyframes twinkle{from{transform:scale(.65);opacity:.22}to{transform:scale(1.35);opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #b78aff22}50%{box-shadow:0 0 28px 5px #b78aff22}}
+@keyframes equalize{0%,100%{height:5px}50%{height:19px}}
+header{padding:22px clamp(18px,5vw,70px);display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid #ffffff0c}
+.brand{font-size:15px;letter-spacing:.14em;color:var(--lilac)} .top-note{font:11px/1.5 Arial,sans-serif;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+main{width:min(1000px,calc(100% - 32px));margin:auto}
+.hero{min-height:72vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:75px 12px 65px;position:relative}
+.moon{font-size:32px;color:var(--lilac);margin-bottom:18px;filter:drop-shadow(0 0 16px #b78aff);animation:float 5s ease-in-out infinite}
+.eyebrow{font:11px Arial,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:var(--violet)}
+h1{font-size:clamp(45px,9vw,94px);font-weight:400;line-height:.98;letter-spacing:-.055em;margin:18px 0 24px;text-shadow:0 0 36px #9a6cff35}
+h1 span{font-style:italic;color:var(--lilac)}
+.hero p{font-size:clamp(16px,2vw,20px);line-height:1.8;max-width:550px;color:#d6d0ed;margin:0 auto 30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 21px;border:1px solid #c9a7ff6b;border-radius:999px;color:var(--white);background:linear-gradient(120deg,#8b5be526,#b78aff0c);text-decoration:none;font:12px Arial,sans-serif;letter-spacing:.08em;cursor:pointer;transition:.25s}
+.btn:hover{transform:translateY(-2px);background:#a778ff26;border-color:var(--violet)}
+.scroll{position:absolute;bottom:24px;font:10px Arial,sans-serif;letter-spacing:.2em;color:#918bad}
+section{padding:48px 0 62px;scroll-margin-top:20px}
+.section-head{margin-bottom:24px}
+.kicker{font:10px Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--violet)}
+h2{font-size:clamp(28px,5vw,43px);font-weight:400;margin:9px 0 8px}
+.sub{font:14px/1.7 Arial,sans-serif;color:var(--muted);max-width:620px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,34px);backdrop-filter:blur(10px);box-shadow:0 20px 80px #0002}
+.music-layout{display:grid;grid-template-columns:1fr;gap:18px}
+.now-playing{display:flex;gap:16px;align-items:center;padding:16px;border-radius:16px;background:#a78aff0d;border:1px solid #b78aff20;margin-bottom:18px}
+.disc{width:58px;height:58px;flex-shrink:0;border-radius:50%;background:radial-gradient(circle,#1b123b 0 13%,#c6a4ff 14% 17%,#332052 18% 40%,#b78aff 41% 44%,#24173c 45%);display:grid;place-items:center;animation:spin 8s linear infinite;animation-play-state:paused;box-shadow:0 0 22px #9b6bff33}
+.disc.playing{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.track-title{font-size:19px;margin-bottom:5px}.track-meta{font:12px Arial,sans-serif;color:var(--muted)}
+.bars{display:flex;gap:3px;align-items:center;height:22px;margin-left:auto}
+.bars i{width:3px;height:6px;border-radius:5px;background:var(--violet);display:block}
+.playing .bars i{animation:equalize .65s ease-in-out infinite}.bars i:nth-child(2){animation-delay:.15s}.bars i:nth-child(3){animation-delay:.3s}.bars i:nth-child(4){animation-delay:.08s}.bars i:nth-child(5){animation-delay:.22s}
+.song-list{display:grid;gap:10px}
+.song{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center;padding:13px 14px;border:1px solid #ffffff12;border-radius:14px;background:#080a201c}
+.song-num{font:12px Arial,sans-serif;color:#a99acb}.song-name{font-size:16px}.song-artist{font:11px Arial,sans-serif;color:var(--muted);margin-top:4px}
+.song button{border:1px solid #a981ed5c;background:#b78aff12;color:#e9dcff;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:14px}
+.embed-wrap{margin-top:16px;display:none}.embed-wrap.visible{display:block}.embed-wrap iframe{width:100%;height:230px;border:0;border-radius:14px}.embed-wrap audio{width:100%}
+.hint{font:12px/1.7 Arial,sans-serif;color:#a9a2c7;margin-top:14px}
+.secret-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.secret{min-height:145px;text-align:left;border:1px solid var(--line);border-radius:18px;padding:19px;background:linear-gradient(145deg,#b78aff12,#ffffff03);color:var(--white);cursor:pointer;transition:.25s}
+.secret:hover{transform:translateY(-4px);border-color:#cba9ff8a}
+.secret .lock{font-size:22px;color:var(--violet);display:block;margin-bottom:16px}.secret strong{font-weight:400;font-size:17px}.secret small{display:block;color:var(--muted);font:11px Arial,sans-serif;margin-top:9px}
+.secret-content{display:none;margin-top:14px;font-size:17px;line-height:1.8;color:#e7defb}.secret-content.open{display:block}
+.memories{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.memory{border:1px solid var(--line);border-radius:17px;padding:20px;background:#ffffff05;min-height:150px}
+.memory .symbol{font-size:22px;color:var(--violet)}.memory h3{font-size:19px;font-weight:400;margin:14px 0 8px}.memory p{font:13px/1.7 Arial,sans-serif;color:var(--muted);margin:0}
+.letter{position:relative;overflow:hidden}.letter:after{content:"✦";position:absolute;right:24px;top:18px;font-size:70px;color:#b78aff16}
+.letter p{font-size:17px;line-height:1.95;color:#e0d9f4;max-width:700px;white-space:pre-line}
+.sign{font-style:italic;color:var(--lilac);font-size:23px;margin-top:25px}
+footer{text-align:center;padding:38px 15px 48px;color:#9991b8;font:11px/1.8 Arial,sans-serif;letter-spacing:.05em}
+footer span{color:var(--violet)}
+@media(max-width:650px){.secret-grid,.memories{grid-template-columns:1fr}.secret{min-height:110px}.hero{min-height:76vh}.top-note{display:none}header{padding:18px}.song{grid-template-columns:26px 1fr auto}.panel{padding:18px}}
+</style>
+</head>
+<body>
+<div id="stars" aria-hidden="true"></div>
+<header><div class="brand">✦ UN PETIT UNIVERS</div><div class="top-note">quelque part entre la nuit et toi</div></header>
+<main>
+<section class="hero" id="home">
+  <div class="moon">☾</div><div class="eyebrow">un lien, un secret, un peu de nous</div>
+  <h1>un <span>TRUC</span><br>pour toi.</h1>
+  <p>Je ne savais pas trop comment mettre tout ce que je ressens dans un cadeau.<br>Alors j'ai essayé de le cacher dans un petit coin d'internet.</p>
+  <a class="btn" href="#musique">Entre, c'est pour toi <span>↘</span></a>
+  <div class="scroll">FAIS DÉFILER DOUCEMENT ↓</div>
+</section>
+
+<section id="musique">
+  <div class="section-head"><div class="kicker">01 — les chansons</div><h2>Si tu étais une mélodie…</h2><div class="sub">Il y a des chansons qui ne sont plus juste des chansons depuis que je les associe à toi. Certaines me rappellent un moment, d'autres une sensation que je ne sais pas vraiment expliquer.</div></div>
+  <div class="panel">
+    <div class="now-playing" id="nowPlaying"><div class="disc" id="disc">✦</div><div><div class="track-title" id="currentTitle">La bande-son de mes pensées</div><div class="track-meta" id="currentMeta">Choisis un morceau juste en dessous</div></div><div class="bars"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="song-list" id="songList"></div>
+    <div class="embed-wrap" id="player"></div>
+    <div class="hint">Pour écouter les morceaux, ajoute leurs liens YouTube ou Spotify dans le fichier du site. Les liens YouTube s'ouvrent dans un lecteur intégré. Tu peux aussi ajouter un fichier audio MP3 que tu as le droit d'utiliser.</div>
+  </div>
+</section>
+
+<section id="secrets">
+  <div class="section-head"><div class="kicker">02 — à ouvrir doucement</div><h2>Trois petits secrets.</h2><div class="sub">Ce ne sont pas des énigmes. Juste des choses que je voulais te laisser découvrir à ton rythme.</div></div>
+  <div class="secret-grid">
+    <button class="secret" onclick="toggleSecret(0)"><span class="lock">✧</span><strong>Une chose que tu ignores</strong><small>appuie pour découvrir</small></button>
+    <button class="secret" onclick="toggleSecret(1)"><span class="lock">☾</span><strong>Quand tu me manques</strong><small>appuie pour découvrir</small></button>
+    <button class="secret" onclick="toggleSecret(2)"><span class="lock">✦</span><strong>Ce que je garde de toi</strong><small>appuie pour découvrir</small></button>
+  </div>
+  <div class="panel secret-content" id="secret0">Il y a des détails chez toi que tu ne remarques probablement même pas. Moi, je les remarque. Et parfois, ce sont précisément ces petits riens qui me restent dans la tête bien après qu'on s'est quittés.</div>
+  <div class="panel secret-content" id="secret1">Quand tu me manques, je ne cherche pas toujours à faire quelque chose pour que ça passe. Parfois, je laisse juste la sensation exister un peu, parce qu'elle me rappelle que quelqu'un a pris une vraie place dans ma vie.</div>
+  <div class="panel secret-content" id="secret2">Je garde les moments simples. Les paroles qui n'avaient l'air de rien, les silences confortables, les petites habitudes. Tout ce qui ne ferait peut-être pas une grande histoire pour quelqu'un d'autre, mais qui compte pour moi.</div>
+</section>
+
+<section id="souvenirs">
+  <div class="section-head"><div class="kicker">03 — petites constellations</div><h2>Des morceaux de nous.</h2><div class="sub">Tu peux remplacer ces textes par vos vrais souvenirs : une date, une blague, une promenade, un moment où tu t'es dit « je vais m'en rappeler ».</div></div>
+  <div class="memories">
+    <article class="memory"><div class="symbol">✧</div><h3>Un instant tout simple</h3><p>Ce moment où il ne s'est rien passé d'extraordinaire, et où pourtant j'étais bien. J'aimerais pouvoir remettre ce souvenir dans ma poche.</p></article>
+    <article class="memory"><div class="symbol">☄</div><h3>Un détail à nous</h3><p>Une phrase, un regard, une habitude ou une blague que personne ne comprendrait comme nous. Les petits détails font parfois les plus beaux souvenirs.</p></article>
+    <article class="memory"><div class="symbol">☾</div><h3>À garder pour plus tard</h3><p>J'espère qu'on aura encore plein de choses à raconter, et que certains de nos souvenirs préférés ne sont même pas encore arrivés.</p></article>
+  </div>
+</section>
+
+<section id="lettre">
+  <div class="section-head"><div class="kicker">04 — la dernière page</div><h2>Une lettre, juste pour toi.</h2></div>
+  <div class="panel letter">
+    <p>Je crois que je voulais surtout te donner quelque chose qui te ressemble un peu à mes yeux : quelque chose qu'on peut garder, retrouver, et qui prend un autre sens selon le moment où on y revient.
+
+Je ne sais pas toujours dire les choses parfaitement. Alors j'ai mis ici des chansons, quelques mots et des bouts de pensées. Pas pour tout expliquer, ni pour faire de ce cadeau quelque chose d'immense. Juste pour te laisser une petite preuve de la place que tu as.
+
+Et si un jour tu tombes sur ce lien au hasard, au milieu d'une journée ordinaire, j'espère qu'il te fera sourire. Même juste un peu. J'espère que tu te sentiras aimé, sans avoir besoin de chercher plus loin que ça.</p>
+    <div class="sign">— à toi, avec tout ce que je n'arrive pas toujours à dire.</div>
+  </div>
+</section>
+</main>
+<footer>fait avec soin, un peu de violet et beaucoup de pensées pour toi <span>✦</span><br>ce petit univers est à toi, chaque fois que tu en as besoin.</footer>
+
+<script>
+/* ✦ PERSONNALISE ICI ✦
+   type: "youtube" avec une URL YouTube, "spotify" avec une URL Spotify,
+   ou "audio" avec le chemin d'un fichier MP3 placé dans le dossier du site.
+   Duplique une ligne pour ajouter autant de chansons que tu veux.
+*/
+const songs = [
+  type:Audio
+  { title: "La deuxième chanson", artist: "Nom de l'artiste", type: "spotify", url: "https://open.spotify.com/track/REMPLACE_PAR_TON_LIEN", note: "Un petit souvenir ou une sensation liée à ce morceau." },
+  { title: "Un morceau rien qu'à nous", artist: "Nom de l'artiste", type: "youtube", url: "https://www.youtube.com/watch?v=VIDEO_ID", note: "Ce que j'aimerais que tu ressentes en l'écoutant." }
+];
+
+const songList = document.getElementById("songList");
+const player = document.getElementById("player");
+const nowPlaying = document.getElementById("nowPlaying");
+const disc = document.getElementById("disc");
+function youtubeId(url){
+  try { const u = new URL(url); if(u.hostname.includes("youtu.be")) return u.pathname.slice(1); if(u.hostname.includes("youtube.com")) return u.searchParams.get("v") || (u.pathname.includes("/embed/") ? u.pathname.split("/embed/")[1] : null); } catch(e){} return null;
+}
+function playSong(index){
+  const s=songs[index];
+  document.getElementById("currentTitle").textContent=s.title;
+  document.getElementById("currentMeta").textContent=s.artist + (s.note ? " · " + s.note : "");
+  nowPlaying.classList.add("playing"); disc.classList.add("playing");
+  player.innerHTML=""; player.classList.add("visible");
+  if(s.type==="youtube"){
+    const id=youtubeId(s.url);
+    if(id && id!=="VIDEO_ID"){
+      const iframe=document.createElement("iframe"); iframe.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id)+"?autoplay=1"; iframe.title="Lecteur YouTube : "+s.title; iframe.allow="autoplay; encrypted-media; picture-in-picture"; iframe.allowFullscreen=true; player.appendChild(iframe);
+    } else { player.innerHTML='<p class="hint">Ajoute le vrai lien YouTube dans le tableau <code>songs</code> du fichier index.html pour écouter ce morceau ici.</p>'; }
+  } else if(s.type==="spotify"){
+    const match=s.url.match(/open\.spotify\.com\/(track|album|playlist|episode|show)\/([a-zA-Z0-9]+)/);
+    if(match){const iframe=document.createElement("iframe"); iframe.src="https://open.spotify.com/embed/"+match[1]+"/"+match[2]+"?utm_source=generator"; iframe.title="Lecteur Spotify : "+s.title; iframe.allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"; iframe.style.height="152px"; player.appendChild(iframe);}
+    else player.innerHTML='<p class="hint">Ajoute un lien Spotify valide dans le tableau <code>songs</code> du fichier index.html.</p>';
+  } else if(s.type==="audio"){
+    const audio=document.createElement("audio"); audio.controls=true; audio.autoplay=true; audio.src=s.url; player.appendChild(audio);
+  }
+  document.querySelectorAll(".song button").forEach((b,i)=>b.textContent=i===index?"♫":"▶");
+}
+songs.forEach((s,i)=>{
+  const row=document.createElement("div"); row.className="song";
+  row.innerHTML='<div class="song-num">'+String(i+1).padStart(2,"0")+'</div><div><div class="song-name"></div><div class="song-artist"></div></div><button aria-label="Écouter ce morceau">▶</button>';
+  row.querySelector(".song-name").textContent=s.title; row.querySelector(".song-artist").textContent=s.artist;
+  row.querySelector("button").addEventListener("click",()=>playSong(i)); songList.appendChild(row);
+});
+function toggleSecret(i){document.getElementById("secret"+i).classList.toggle("open")}
+const stars=document.getElementById("stars");
+for(let i=0;i<115;i++){const s=document.createElement("i");s.className="star";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.width=s.style.height=(Math.random()*2+1)+"px";s.style.setProperty("--d",(Math.random()*4+2)+"s");s.style.setProperty("--o",Math.random()*.7+.2);stars.appendChild(s)}
+</script>
+</body>
+</html>
