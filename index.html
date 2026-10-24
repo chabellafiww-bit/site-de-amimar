@@ -263,6 +263,204 @@ footer span { color: var(--violet); }
   .song { grid-template-columns: 26px 1fr auto; }
   .panel { padding: 18px; }
 }
+  
+/* ===== MINI-JEU SECRET : UN TRUC POUR TOI ===== */
+
+#secret-heart-trigger {
+  position: fixed;
+  right: 13px;
+  bottom: 12px;
+  z-index: 900;
+  border: 0;
+  background: transparent;
+  color: #b78aff;
+  font-size: 19px;
+  opacity: 0.38;
+  cursor: pointer;
+  padding: 8px;
+  transition: opacity .25s, transform .25s;
+}
+
+#secret-heart-trigger:hover {
+  opacity: 1;
+  transform: rotate(25deg) scale(1.2);
+}
+
+#heart-game-overlay,
+#heart-game-overlay * {
+  box-sizing: border-box;
+}
+
+#heart-game-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(4, 5, 20, .94);
+  backdrop-filter: blur(10px);
+  color: #f4edff;
+  font-family: inherit;
+}
+
+#heart-game-overlay.hg-open {
+  display: flex;
+}
+
+#heart-game-overlay .hg-panel {
+  width: min(100%, 430px);
+  padding: 24px 18px;
+  border: 1px solid rgba(183, 138, 255, .4);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #11132f, #19102d);
+  box-shadow: 0 0 45px rgba(144, 85, 255, .13);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#heart-game-overlay .hg-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  color: #d9c6ff;
+  border: 0;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#heart-game-overlay .hg-title {
+  font-size: 24px;
+  margin: 10px 20px 8px;
+  color: #e3ceff;
+}
+
+#heart-game-overlay .hg-description {
+  color: #c2bbda;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 auto 18px;
+}
+
+#heart-game-overlay .hg-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  margin: 15px 0;
+  font-size: 13px;
+  color: #d8c9ff;
+}
+
+#heart-game-overlay .hg-stat strong {
+  display: block;
+  color: #fff;
+  font-size: 21px;
+  margin-top: 4px;
+}
+
+#heart-game-overlay .hg-arena {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border: 1px solid rgba(183, 138, 255, .2);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 20% 25%, #34305d 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 60%, #8d6bc8 0 1px, transparent 2px),
+    radial-gradient(ellipse at bottom, #211943, #0a0d26 75%);
+  background-size: 67px 71px, 89px 83px, auto;
+}
+
+#heart-game-overlay .hg-item {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 30px;
+  line-height: 1;
+  border-radius: 50%;
+  animation: hg-appear .18s ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#heart-game-overlay .hg-item:active {
+  transform: scale(.8);
+}
+
+#heart-game-overlay .hg-item.hg-trap {
+  font-size: 27px;
+  filter: saturate(.7);
+}
+
+#heart-game-overlay .hg-item.hg-gone {
+  display: none;
+}
+
+@keyframes hg-appear {
+  from { opacity: 0; transform: scale(.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#heart-game-overlay .hg-button {
+  border: 1px solid #b78aff;
+  border-radius: 999px;
+  background: #b78aff;
+  color: #100b25;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: transform .2s, background .2s;
+}
+
+#heart-game-overlay .hg-button:hover {
+  transform: translateY(-2px);
+  background: #d2b5ff;
+}
+
+#heart-game-overlay .hg-button.hg-secondary {
+  color: #e3ceff;
+  background: transparent;
+  border-color: rgba(183, 138, 255, .45);
+}
+
+#heart-game-overlay .hg-result {
+  min-height: 65px;
+  margin: 15px 0;
+  color: #e3ceff;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+#heart-game-overlay .hg-hidden {
+  display: none !important;
+}
+
+@media (max-width: 380px) {
+  #heart-game-overlay .hg-panel {
+    padding: 22px 12px;
+  }
+
+  #heart-game-overlay .hg-arena {
+    height: 250px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #heart-game-overlay .hg-item {
+    animation: none;
+  }
+}
+
 </style>
 </head>
 
@@ -634,6 +832,252 @@ try {
   console.error("Erreur du site :", error);
 }
 </script>
+      
+<!-- Petite étoile secrète : clique dessus pour découvrir le jeu -->
+<button
+  id="secret-heart-trigger"
+  type="button"
+  aria-label="Une petite surprise"
+  title="psst..."
+>✦</button>
+
+<!-- Fenêtre du mini-jeu -->
+<div id="heart-game-overlay" role="dialog"
+     aria-modal="true" aria-labelledby="hg-title">
+
+  <div class="hg-panel">
+    <button class="hg-close" id="hg-close"
+            type="button" aria-label="Fermer">×</button>
+
+    <div id="hg-intro">
+      <div style="font-size:32px;color:#b78aff">✧ ♡ ✧</div>
+      <h2 class="hg-title" id="hg-title">Une petite mission pour toi</h2>
+      <p class="hg-description">
+        Tu as trouvé un secret.<br>
+        Maintenant, attrape <strong>12 cœurs</strong> en 20 secondes.<br>
+        Mais attention… certains ne sont pas tes amis. :)
+      </p>
+      <button class="hg-button" id="hg-start" type="button">
+        J'accepte le défi
+      </button>
+    </div>
+
+    <div id="hg-playing" class="hg-hidden">
+      <h2 class="hg-title">Attrape-les ♡</h2>
+
+      <div class="hg-stats">
+        <div class="hg-stat">Cœurs<strong id="hg-score">0</strong></div>
+        <div class="hg-stat">Temps<strong id="hg-time">20</strong></div>
+        <div class="hg-stat">Pièges<strong id="hg-traps">0</strong></div>
+      </div>
+
+      <div class="hg-arena" id="hg-arena"
+           aria-label="Zone de jeu"></div>
+
+      <p class="hg-description" style="margin:12px 0 0">
+        💜 Cœur = +1 &nbsp; · &nbsp; 🖤 Piège = −2
+      </p>
+    </div>
+
+    <div id="hg-finished" class="hg-hidden">
+      <div style="font-size:32px">💜</div>
+      <h2 class="hg-title" id="hg-result-title">Mission terminée</h2>
+      <p class="hg-result" id="hg-result-text"></p>
+      <button class="hg-button" id="hg-retry" type="button">
+        Recommencer
+      </button>
+      <button class="hg-button hg-secondary" id="hg-finish-close"
+              type="button" style="margin:8px 0 0">
+        Retour à mon petit site
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  
+(() => {
+  const overlay = document.getElementById("heart-game-overlay");
+  const trigger = document.getElementById("secret-heart-trigger");
+  const closeButton = document.getElementById("hg-close");
+  const startButton = document.getElementById("hg-start");
+  const retryButton = document.getElementById("hg-retry");
+  const finishCloseButton = document.getElementById("hg-finish-close");
+
+  const intro = document.getElementById("hg-intro");
+  const playing = document.getElementById("hg-playing");
+  const finished = document.getElementById("hg-finished");
+  const arena = document.getElementById("hg-arena");
+
+  const scoreDisplay = document.getElementById("hg-score");
+  const timeDisplay = document.getElementById("hg-time");
+  const trapsDisplay = document.getElementById("hg-traps");
+  const resultTitle = document.getElementById("hg-result-title");
+  const resultText = document.getElementById("hg-result-text");
+
+  if (!overlay || !trigger || !arena) return;
+
+  let score = 0;
+  let traps = 0;
+  let timeLeft = 20;
+  let timer = null;
+  let spawnTimer = null;
+  let active = false;
+  let roundId = 0;
+
+  function showScreen(screen) {
+    intro.classList.toggle("hg-hidden", screen !== "intro");
+    playing.classList.toggle("hg-hidden", screen !== "playing");
+    finished.classList.toggle("hg-hidden", screen !== "finished");
+  }
+
+  function openGame() {
+    stopGame();
+    overlay.classList.add("hg-open");
+    showScreen("intro");
+  }
+
+  function closeGame() {
+    stopGame();
+    overlay.classList.remove("hg-open");
+  }
+
+  function stopGame() {
+    active = false;
+    roundId++;
+    clearInterval(timer);
+    clearInterval(spawnTimer);
+    timer = null;
+    spawnTimer = null;
+    arena.replaceChildren();
+  }
+
+  function updateStats() {
+    scoreDisplay.textContent = score;
+    timeDisplay.textContent = timeLeft;
+    trapsDisplay.textContent = traps;
+  }
+
+  function finishGame() {
+    if (!active) return;
+
+    active = false;
+    clearInterval(timer);
+    clearInterval(spawnTimer);
+    timer = null;
+    spawnTimer = null;
+    arena.replaceChildren();
+
+    showScreen("finished");
+
+    if (score >= 12) {
+      resultTitle.textContent = "Bon, t'es fort toi. ♡";
+      resultText.textContent =
+        `Tu as attrapé ${score} cœurs et touché ${traps} piège(s). ` +
+        "Tu viens officiellement de gagner une petite place de plus dans mon cœur. " +
+        "Comme si tu en avais besoin…";
+    } else {
+      resultTitle.textContent = "Même pas peur ? 😏";
+      resultText.textContent =
+        `Tu as attrapé ${score} cœur(s) et touché ${traps} piège(s). ` +
+        "Je crois que tu vas devoir retenter ta chance. " +
+        "Allez, je suis sûre que tu peux faire mieux. 💜";
+    }
+  }
+
+  function spawnItem(id) {
+    if (!active || id !== roundId) return;
+
+    const item = document.createElement("button");
+    const isTrap = Math.random() < 0.28;
+
+    item.type = "button";
+    item.className = "hg-item" + (isTrap ? " hg-trap" : "");
+    item.textContent = isTrap ? "🖤" : "💜";
+    item.setAttribute(
+      "aria-label",
+      isTrap ? "Piège" : "Attraper un cœur"
+    );
+
+    const maxX = Math.max(0, arena.clientWidth - 48);
+    const maxY = Math.max(0, arena.clientHeight - 48);
+
+    item.style.left = Math.floor(Math.random() * (maxX + 1)) + "px";
+    item.style.top = Math.floor(Math.random() * (maxY + 1)) + "px";
+
+    item.addEventListener("click", () => {
+      if (!active || id !== roundId || item.classList.contains("hg-gone")) {
+        return;
+      }
+
+      item.classList.add("hg-gone");
+
+      if (isTrap) {
+        score = Math.max(0, score - 2);
+        traps++;
+      } else {
+        score++;
+      }
+
+      updateStats();
+
+      if (score >= 12) {
+        finishGame();
+      }
+    });
+
+    arena.appendChild(item);
+
+    // Les cœurs disparaissent s'il ne les attrape pas assez vite.
+    window.setTimeout(() => {
+      item.remove();
+    }, 1250);
+  }
+
+  function startGame() {
+    stopGame();
+
+    score = 0;
+    traps = 0;
+    timeLeft = 20;
+    updateStats();
+    showScreen("playing");
+
+    active = true;
+    const thisRound = roundId;
+
+    spawnItem(thisRound);
+
+    spawnTimer = setInterval(() => {
+      spawnItem(thisRound);
+    }, 480);
+
+    timer = setInterval(() => {
+      timeLeft--;
+      updateStats();
+
+      if (timeLeft <= 0) {
+        finishGame();
+      }
+    }, 1000);
+  }
+
+  trigger.addEventListener("click", openGame);
+  closeButton.addEventListener("click", closeGame);
+  finishCloseButton.addEventListener("click", closeGame);
+  startButton.addEventListener("click", startGame);
+  retryButton.addEventListener("click", startGame);
+
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) closeGame();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && overlay.classList.contains("hg-open")) {
+      closeGame();
+    }
+  });
+})();
+
+</script>
 </body>
 </html>
-```
